@@ -5,4 +5,4 @@ Implementação de uma tela (interface gráfica) utilizando o Compose Desktop. N
 As impressões foram feitas manualmente, não há acesso a API nem nada do tipo, a imagem do poster se encontra na pasta `resources`.
 
 - Tela
-!(images/day1-ui.png)
+![Tela](images/day1-ui.png)
