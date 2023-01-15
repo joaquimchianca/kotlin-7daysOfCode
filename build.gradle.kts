@@ -27,6 +27,10 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation("io.ktor:ktor-client-core:2.2.1")
+                implementation("io.ktor:ktor-client-cio:2.2.1")
+                implementation("io.coil-kt:coil:2.2.2")
+                implementation("io.coil-kt:coil-compose:2.2.2")
             }
         }
         val jvmTest by getting
