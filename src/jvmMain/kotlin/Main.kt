@@ -2,6 +2,8 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -23,13 +25,36 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import extensions.loadImageToBitMap
+import models.Movie
 import java.net.URL
 
 
 @Composable
 @Preview
 fun App() {
-    val imageURL = "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg"
+
+    val movies = listOf(
+        Movie(
+            "Pulp Fiction",
+            "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,686,1000_AL_.jpg",
+            "8.9",
+            "1994"
+        ),
+
+        Movie(
+            "The Godfather",
+            "https://m.media-amazon.com/images/I/41ExyjehMuL._SX439_BO1,204,203,200_.jpg",
+            "9.2",
+            "1972"
+        ),
+
+        Movie(
+            "Fight Club",
+            "https://br.web.img2.acsta.net/medias/nmedia/18/91/25/21/20136595.jpg",
+            "8.2",
+            "2003"
+        )
+    )
 
     MaterialTheme(
         colors = darkColors()
@@ -38,62 +63,74 @@ fun App() {
             elevation = 4.dp
         ) {
             Box(modifier = Modifier.fillMaxSize()){
-                Column(
-                    modifier = Modifier
-                        .width(200.dp)
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(
-                        bitmap = imageURL.loadImageToBitMap(),
-                        contentDescription = "capa do filme",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(4.dp))
-                    )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                top = 8.dp,
-                                start = 8.dp,
-                                end = 8.dp
-                            ),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ){
-                        Row(verticalAlignment = Alignment.CenterVertically){
-                            Icon(
-                                Icons.Filled.Star,
-                                contentDescription = "ícone de nota para filme",
-                                modifier = Modifier.height(16.dp),
-                                tint = Color.Yellow
-                            )
-                            Text("8.9",
-                                modifier = Modifier.padding(start = 2.dp),
-                                color = Color(0xffeeeeee),
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-                        Text(
-                            "1994",
-                            fontSize = 14.sp,
-                            color = Color(0xffeeeeee)
-                        )
+                LazyColumn {
+                    items(movies){ movie ->
+                        MovieItem(movie)
                     }
-                    Text("Pulp Fiction",
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            top = 8.dp,
-                            end = 16.dp
-                        ),
-                        fontSize = 12.sp
-                    )
                 }
             }
         }
     }
 }
+
+@Composable
+private fun MovieItem(movie: Movie){
+    Column(
+        modifier = Modifier
+            .width(200.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            bitmap = movie.imagem.loadImageToBitMap(),
+            contentDescription = "capa do filme",
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(4.dp))
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = 8.dp,
+                    start = 8.dp,
+                    end = 8.dp
+                ),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            Row(verticalAlignment = Alignment.CenterVertically){
+                Icon(
+                    Icons.Filled.Star,
+                    contentDescription = "ícone de nota para filme",
+                    modifier = Modifier.height(16.dp),
+                    tint = Color.Yellow
+                )
+                Text(
+                    movie.nota,
+                    modifier = Modifier.padding(start = 2.dp),
+                    color = Color(0xffeeeeee),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Text(
+                movie.ano,
+                fontSize = 14.sp,
+                color = Color(0xffeeeeee)
+            )
+        }
+        Text(
+            movie.titulo,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 8.dp,
+                end = 16.dp
+            ),
+            fontSize = 12.sp
+        )
+    }
+}
+
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication,
