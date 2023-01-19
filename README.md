@@ -16,3 +16,8 @@ Melhora visual do conteúdo da janela, que estava igual ao apresentado no primei
 Agora, foram trabalhados alguns conceitos do JetPack Compose for Desktop: arredondar uma imagem, mudança de tamanho de fonte dos textos, inserção de ícones, estruturação mais complexa da página (utilizando Surface e Box), além de usar Dark Theme na aplicação.
 
 <img src = "images/day3-ui.png" width="25%">
+
+## Dia 4
+Possível agora exibir vários filmes na tela. Criação do modelo Movie, e utilização do LazyColumn para mostrar os filmes na tela.
+
+<img src = "images/day4.png" width="15%">
