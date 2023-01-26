@@ -21,3 +21,6 @@ Agora, foram trabalhados alguns conceitos do JetPack Compose for Desktop: arredo
 Possível agora exibir vários filmes na tela. Criação do modelo Movie, e utilização do LazyColumn para mostrar os filmes na tela.
 
 <img src = "images/day4.png" width="15%">
+
+## Dia 5
+Alimentando projeto com a API do IMDB, especificamente os 250 filmes mais bem votados do site. Utilizada a biblioteca Retrofit para criar o método HTTP (GET) e cliente HTTP para comunicação com servidor.
